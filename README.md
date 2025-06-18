@@ -1,2 +1,132 @@
-# roblox
-i
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fake Roblox Tycoon</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
+
+  body {
+    background: linear-gradient(135deg, #d52b1e, #000);
+    font-family: 'Roboto Condensed', sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 30px 20px;
+  }
+
+  header {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 6px black;
+  }
+
+  .tycoon-container {
+    background: #222;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 100%;
+    padding: 30px;
+    box-shadow: 0 0 20px #ff0000cc;
+    text-align: center;
+  }
+
+  .cash-display {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px #b00000;
+  }
+
+  .cpc-display {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: #ccc;
+  }
+
+  button {
+    font-size: 22px;
+    font-weight: 700;
+    background: #ff1a1a;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 15px 40px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 0 15px #ff0000;
+  }
+
+  button:hover {
+    background: #cc0000;
+    box-shadow: 0 0 25px #ff4d4d;
+  }
+
+  .message {
+    margin-top: 15px;
+    font-weight: 700;
+    height: 24px;
+    min-height: 24px;
+  }
+</style>
+</head>
+<body>
+
+<header>Fake Roblox Tycoon</header>
+
+<div class="tycoon-container">
+  <div class="cash-display" id="cashDisplay">Cash: 0</div>
+  <div class="cpc-display" id="cpcDisplay">Cash per Click: 10</div>
+
+  <button id="earnBtn">Collect Cash</button>
+  <button id="upgradeBtn">Upgrade (Cost: 100)</button>
+
+  <div class="message" id="message"></div>
+</div>
+
+<script>
+  let cash = 0;
+  let cashPerClick = 10;
+
+  const cashDisplay = document.getElementById('cashDisplay');
+  const cpcDisplay = document.getElementById('cpcDisplay');
+  const message = document.getElementById('message');
+
+  const earnBtn = document.getElementById('earnBtn');
+  const upgradeBtn = document.getElementById('upgradeBtn');
+
+  earnBtn.addEventListener('click', () => {
+    cash += cashPerClick;
+    updateDisplay();
+    message.textContent = '';
+  });
+
+  upgradeBtn.addEventListener('click', () => {
+    if (cash >= 100) {
+      cash -= 100;
+      cashPerClick += 5;
+      updateDisplay();
+      message.textContent = 'Upgrade bought! Cash per click increased.';
+    } else {
+      message.textContent = 'Not enough cash for upgrade.';
+    }
+  });
+
+  function updateDisplay() {
+    cashDisplay.textContent = `Cash: ${cash}`;
+    cpcDisplay.textContent = `Cash per Click: ${cashPerClick}`;
+  }
+
+  updateDisplay();
+</script>
+
+</body>
+</html>
+
